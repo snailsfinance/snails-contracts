@@ -1,0 +1,31 @@
+[package]
+name = "snails_exchange"
+version = "0.1.0"
+authors = ["SnailsFinance <john.snails.fi@gmail.com>"]
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+uint = { version = "0.9.0", default-features = false }
+near-sdk = "4.0.0-pre.4"
+near-contract-standards = "4.0.0-pre.4"
+
+[dev-dependencies]
+near-sdk-sim = "4.0.0-pre.4"
+test-token = { path = "../test-token" }
+proptest = { version = "1.0.0" }
+rand = { version = "0.8.4" }
+sim = { path = "../sim" }
+
+[profile.release]
+codegen-units = 1
+# Tell `rustc` to optimize for small code size.
+opt-level = "z"
+lto = true
+#debug = false
+debug = true
+panic = "abort"
+# Opt into extra safety checks on arithmetic operations https://stackoverflow.com/a/64136471/249801
+overflow-checks = true
